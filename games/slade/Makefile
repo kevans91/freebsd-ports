@@ -17,6 +17,7 @@ LIB_DEPENDS=	libfluidsynth.so:${PORTSDIR}/audio/fluidsynth \
 		libsfml-system.so:${PORTSDIR}/devel/sfml \
 		libsfml-audio.so:${PORTSDIR}/devel/sfml \
 		libsfml-window.so:${PORTSDIR}/devel/sfml
+BUILD_DEPENDS=  zip:${PORTSDIR}/archivers/zip
 
 PLIST_FILES=	bin/slade \
 		share/slade3/slade.pk3
@@ -26,8 +27,10 @@ GH_ACCOUNT=	kevans91 #sirjuddington
 GH_PROJECT=	SLADE
 
 USES=		cmake:outsource \
+		compiler:c++11-lib \
 		pkgconfig
 
+CXXFLAGS+=		-std=c++11
 CMAKE_ARGS=		-DCMAKE_INSTALL_PREFIX=${PREFIX}
 CMAKE_BUILD_TYPE=	Release
 
