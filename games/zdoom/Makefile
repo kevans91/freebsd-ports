@@ -4,30 +4,34 @@
 PORTNAME=	zdoom
 PORTVERSION=	2.8.0
 DISTVERSIONPREFIX=	v
-DISTVERSIONSUFFIX=	_unofficial
+DISTVERSIONSUFFIX=	_2_unofficial
 CATEGORIES=	games
 
 MAINTAINER=	self@kyle-evans.net
 COMMENT=	Source port for Doom-engine games
 
-#LICENSE=
-
-LIB_DEPENDS=	libopenal.so:${PORTSDIR}/audio/openal-soft \
-		libSDL2.so:${PORTSDIR}/devel/sdl20
-BUILD_DEPENDS=  zip:${PORTSDIR}/archivers/zip
+BUILD_DEPENDS=	zip:${PORTSDIR}/archivers/zip
 
 PLIST_FILES=	bin/zdoom \
 		share/zdoom/zdoom.pk3
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	kevans91 #sirjuddington
+GH_ACCOUNT=	kevans91
 GH_PROJECT=	zdoom
 
 USES=		cmake:outsource \
+		openal \
 		pkgconfig
+USE_SDL=	sdl2
+CMAKE_ARGS+=		-DNO_FMOD:BOOL=ON
+CMAKE_BUILD_TYPE?=	Release
 
-CMAKE_ARGS=		-DCMAKE_INSTALL_PREFIX=${PREFIX} \
-			-DNO_FMOD=ON
-CMAKE_BUILD_TYPE=	Release
+OPTIONS_DEFINE=	FLUIDSYNTH
+OPTIONS_DEFAULT=FLUIDSYNTH
+
+FLUIDSYNTH_DESC=	FluidSynth sound library support
+FLUIDSYNTH_LIB_DEPENDS=	libfluidsynth.so:${PORTSDIR}/audio/fluidsynth
+FLUIDSYNTH_CMAKE_ON=	-DWITH_FLUIDSYNTH:BOOL=ON
+FLUIDSYNTH_CMAKE_OFF=	-DWITH_FLUIDSYNTH:BOOL=OFF
 
 .include <bsd.port.mk>
