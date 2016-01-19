@@ -31,8 +31,8 @@ USES=		cmake:outsource \
 		pkgconfig
 
 CXXFLAGS+=		-std=c++11
-CMAKE_ARGS=		-DCMAKE_INSTALL_PREFIX=${PREFIX}
-CMAKE_BUILD_TYPE=	Release
+CMAKE_INSTALL_PREFIX?=	${PREFIX}
+CMAKE_BUILD_TYPE?=	Release
 
 USE_WX=		3.0+
 WX_COMPS=	wx
