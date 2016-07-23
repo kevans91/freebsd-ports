@@ -14,8 +14,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	kevans91		#shumatech
 
 USES=		compiler:c++11-lang \
-		gmake \
-		readline
+		gmake
 
 CXXFLAGS+=	-I${PREFIX}/include
 LDFLAGS+=	-L${PREFIX}/lib
@@ -26,7 +25,9 @@ OPTIONS_DEFINE=	BOSSA BOSSASH
 OPTIONS_DEFAULT=	BOSSASH
 
 BOSSA_DESC=	Include BOSSA GUI application using wxWidgets
+
 BOSSASH_DESC=	Include BOSSA Shell
+BOSSASH_USES=	readline
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/bossac ${STAGEDIR}${PREFIX}/bin/bossac
