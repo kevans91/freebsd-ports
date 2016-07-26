@@ -13,8 +13,7 @@ LICENSE=	BSD3CLAUSE
 USE_GITHUB=	yes
 GH_ACCOUNT=	kevans91		#shumatech
 
-USES=		compiler:c++11-lang \
-		gmake
+USES=		compiler:c++11-lang gmake
 
 CXXFLAGS+=	-I${PREFIX}/include
 LDFLAGS+=	-L${PREFIX}/lib
