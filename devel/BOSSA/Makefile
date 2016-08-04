@@ -22,6 +22,7 @@ ALL_TARGET=	bin/bossac
 
 OPTIONS_DEFINE=	BOSSA BOSSASH
 OPTIONS_DEFAULT=	BOSSASH
+OPTIONS_SUB=	yes
 
 BOSSA_DESC=	Include BOSSA GUI application using wxWidgets
 
@@ -39,20 +40,13 @@ do-install-BOSSASH-on:
 
 .include <bsd.port.options.mk>
 
-.if empty(PORT_OPTIONS:MBOSSA)
-PLIST_SUB+=	BOSSA="@comment "
-.else
-PLIST_SUB+=	BOSSA=""
+.if ${PORT_OPTIONS:MBOSSA}
 ALL_TARGET+=	bin/bossa
-
 USE_WX=		3.0
 WX_COMPS=	wx
 .endif
 
-.if empty(PORT_OPTIONS:MBOSSASH)
-PLIST_SUB+=	BOSSASH="@comment "
-.else
-PLIST_SUB+=	BOSSASH=""
+.if ${PORT_OPTIONS:MBOSSASH}
 ALL_TARGET+=	bin/bossash
 .endif
 
