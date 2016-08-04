@@ -1,9 +1,8 @@
 # Created by: Alexander Logvinov <avl@FreeBSD.org>
-# $FreeBSD: head/net/freerdp/Makefile 412348 2016-04-01 14:16:16Z mat $
+# $FreeBSD: head/net/freerdp/Makefile 412348 2016-04-01 14:17:44Z mat $
 
 PORTNAME=	freerdp
-PORTVERSION=	1.2.0
-PORTREVISION=	6
+PORTVERSION=	2.0
 CATEGORIES=	net comms ipv6
 
 MAINTAINER=	ports@FreeBSD.org
@@ -12,13 +11,16 @@ COMMENT=	Free implementation of Remote Desktop Protocol
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USE_OPENSSL=	yes
+LIB_DEPENDS=	libgstreamer-1.0.so:multimedia/gstreamer1 \
+		libgstbase-1.0.so:multimedia/gstreamer1
+
 USE_LDCONFIG=	yes
-USES=		alias cmake:outsource cpe execinfo pkgconfig compiler:c++11-lib
+USE_GNOME=	glib20
+USES=		alias cmake:outsource cpe execinfo pkgconfig compiler:c++11-lib gettext ssl
 USE_GITHUB=	yes
-GH_ACCOUNT=	FreeRDP
-GH_PROJECT=	${GH_ACCOUNT}
-GH_TAGNAME=	f5ff6e1
+GH_ACCOUNT=	kevans91 #FreeRDP
+GH_PROJECT=	FreeRDP #${GH_ACCOUNT}
+GH_TAGNAME=	5b2455f
 
 CPE_VENDOR=	freerdp_project
 
@@ -65,13 +67,18 @@ X11_DESC=		Build FreeRDP X11 client
 X11_BUILD_DEPENDS=	xmlto:textproc/xmlto
 X11_CMAKE_ON=		-DWITH_X11=ON
 X11_CMAKE_OFF=		-DWITH_X11=OFF -DWITH_XKBFILE=OFF
-X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,xfixes
+X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,xfixes,xrender
 
 .include <bsd.port.options.mk>
 
+#.if ${PORT_OPTIONS:X11}
+#USE_XORG+=		render
+#.endif
+
 post-extract:
-	${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|' \
-		-e '/CMAKE_INSTALL_RPATH /d' \
+	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
+	${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|'
+	${REINPLACE_CMD} -e '/CMAKE_INSTALL_RPATH /d' \
 		${WRKSRC}/CMakeLists.txt
 	${REINPLACE_CMD} -e 's|share/man/man1|man/man1|' \
 		${WRKSRC}/client/X11/CMakeLists.txt
