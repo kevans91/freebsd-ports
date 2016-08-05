@@ -5,7 +5,7 @@ PORTNAME=	zdoom
 PORTVERSION=	2.8.1
 CATEGORIES=	games
 
-MAINTAINER=	self@kyle-evans.net
+MAINTAINER=	bsdports@kyle-evans.net
 COMMENT=	Source port for Doom-engine games
 
 BUILD_DEPENDS=	zip:archivers/zip

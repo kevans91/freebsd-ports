@@ -5,7 +5,7 @@ PORTNAME=	freerdp
 PORTVERSION=	2.0
 CATEGORIES=	net comms ipv6
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	bsdports@kyle-evans.net
 COMMENT=	Free implementation of Remote Desktop Protocol
 
 LICENSE=	APACHE20
