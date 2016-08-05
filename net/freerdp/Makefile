@@ -27,6 +27,8 @@ CPE_VENDOR=	freerdp_project
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	-I${WRKSRC}/include -I${WRKSRC}/winpr/include -I${LOCALBASE}/include
 
+MANPAGE=		wlog.1
+
 OPTIONS_DEFINE=		ALSA CUPS DIRECTFB FFMPEG GSTREAMER PULSEAUDIO SSE X11
 OPTIONS_DEFAULT=	CUPS GSTREAMER X11
 OPTIONS_SUB=		yes
@@ -71,19 +73,26 @@ X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,
 
 .include <bsd.port.options.mk>
 
-#.if ${PORT_OPTIONS:X11}
-#USE_XORG+=		render
-#.endif
+.if ${PORT_OPTIONS:MX11}
+MANPAGE+=		xfreerdp.1
+.endif
 
 post-extract:
 	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
-	${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|'
+		${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|'
 	${REINPLACE_CMD} -e '/CMAKE_INSTALL_RPATH /d' \
 		${WRKSRC}/CMakeLists.txt
-	${REINPLACE_CMD} -e 's|share/man/man1|man/man1|' \
+	${REINPLACE_CMD} -e 's/OPENBSD/OPENBSD OR FREEBSD/' \
+		${WRKSRC}/winpr/CMakeLists.txt \
 		${WRKSRC}/client/X11/CMakeLists.txt
 	${REINPLACE_CMD} -e 's/NetBSD__)/NetBSD__) || defined(__FreeBSD__)/' \
 		${WRKSRC}/winpr/libwinpr/utils/trio/triodef.h
 	${REINPLACE_CMD} -e 's|<malloc.h>|<stdlib.h>|' \
 		${WRKSRC}/channels/drive/client/statvfs.c
+
+post-install:
+.for m in ${MANPAGE}
+	${GZIP_CMD} ${STAGEDIR}${MANPREFIX}/man/man1/$m
+.endfor
+
 .include <bsd.port.mk>

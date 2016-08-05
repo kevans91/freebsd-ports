@@ -226,5 +226,5 @@ libdata/pkgconfig/freerdp-client2.pc
 libdata/pkgconfig/freerdp2.pc
 libdata/pkgconfig/winpr-tools2.pc
 libdata/pkgconfig/winpr2.pc
-share/man/man1/wlog.1
-%%X11%%share/man/man1/xfreerdp.1
+man/man1/wlog.1.gz
+%%X11%%man/man1/xfreerdp.1.gz
