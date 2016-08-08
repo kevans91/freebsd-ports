@@ -1,5 +1,5 @@
-# Created by: Kyle Evans <self@kyle-evans.net>
-# $FreeBSD$
+# Created by: Kyle Evans <bsdports@kyle-evans.net>
+# $FreeBSD: head/games/zdoom/Makefile 419723 2016-08-06 00:55:48Z pawel $
 
 PORTNAME=	zdoom
 PORTVERSION=	2.8.1
@@ -13,40 +13,30 @@ LIB_DEPENDS=	libfontconfig.so:x11-fonts/fontconfig \
 		libfreetype.so:print/freetype2 \
 		libsndfile.so:audio/libsndfile
 
-PLIST_FILES=	bin/${PORTNAME} \
-		%%DATADIR%%/${PORTNAME}.pk3
-
 USE_GITHUB=	yes
 GH_ACCOUNT=	rheit
-GH_PROJECT=	zdoom
 
-USES=		cmake:outsource \
-		openal \
-		pkgconfig \
-		gettext \
-		jpeg
-USE_GNOME=	gtk20 \
-		pango \
-		atk \
-		cairo \
-		gdkpixbuf2
+USES=		cmake:outsource	gettext jpeg openal pkgconfig
+USE_GNOME=	atk cairo gdkpixbuf2 gtk20 pango
 USE_SDL=	sdl2
-CMAKE_ARGS+=		-DNO_FMOD:BOOL=ON
+CMAKE_ARGS=	-DNO_FMOD:BOOL=ON
 CMAKE_BUILD_TYPE?=	Release
+
+PLIST_FILES=	bin/${PORTNAME} \
+		${DATADIR}/${PORTNAME}.pk3
 
 OPTIONS_DEFINE=	FLUIDSYNTH
 OPTIONS_DEFAULT=FLUIDSYNTH
 
 FLUIDSYNTH_DESC=	FluidSynth sound library support
 FLUIDSYNTH_LIB_DEPENDS=	libfluidsynth.so:audio/fluidsynth
-FLUIDSYNTH_CMAKE_ON=	-DWITH_FLUIDSYNTH:BOOL=ON
-FLUIDSYNTH_CMAKE_OFF=	-DWITH_FLUIDSYNTH:BOOL=OFF
+FLUIDSYNTH_CMAKE_BOOL=	WITH_FLUIDSYNTH
 
 .include "${.CURDIR}/../doom-data/Makefile.include"
 
 do-install:
-	@${MKDIR}	${STAGEDIR}${PREFIX}/share/${PORTNAME}
-	${INSTALL_PROGRAM} ${CONFIGURE_WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin/
-	${INSTALL_DATA} ${CONFIGURE_WRKSRC}/${PORTNAME}.pk3 ${STAGEDIR}${PREFIX}/share/${PORTNAME}/
+	@${MKDIR} ${STAGEDIR}${DATADIR}
+	${INSTALL_PROGRAM} ${CONFIGURE_WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${CONFIGURE_WRKSRC}/${PORTNAME}.pk3 ${STAGEDIR}${DATADIR}
 
 .include <bsd.port.mk>
