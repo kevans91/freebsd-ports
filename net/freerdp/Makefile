@@ -24,6 +24,7 @@ GH_TAGNAME=	5b2455f
 
 CPE_VENDOR=	freerdp_project
 
+CMAKE_ARGS=	-DWITH_LIBSYSTEMD=OFF -DWITH_WAYLAND=OFF 
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	-I${WRKSRC}/include -I${WRKSRC}/winpr/include -I${LOCALBASE}/include
 
@@ -89,6 +90,7 @@ post-extract:
 		${WRKSRC}/winpr/libwinpr/utils/trio/triodef.h
 	${REINPLACE_CMD} -e 's|<malloc.h>|<stdlib.h>|' \
 		${WRKSRC}/channels/drive/client/statvfs.c
+	${RM} ${WRKSRC}/cmake/FindOpenSSL.cmake
 
 post-install:
 .for m in ${MANPAGE}
