@@ -2,7 +2,7 @@
 # $FreeBSD: head/net/freerdp/Makefile 412348 2016-04-01 14:17:44Z mat $
 
 PORTNAME=	freerdp
-PORTVERSION=	2.0
+PORTVERSION=	2.0.0a
 CATEGORIES=	net comms ipv6
 
 MAINTAINER=	bsdports@kyle-evans.net
@@ -18,8 +18,8 @@ USE_LDCONFIG=	yes
 USE_GNOME=	glib20
 USES=		alias cmake:outsource cpe execinfo pkgconfig compiler:c++11-lib gettext ssl
 USE_GITHUB=	yes
-GH_ACCOUNT=	kevans91 #FreeRDP
-GH_PROJECT=	FreeRDP #${GH_ACCOUNT}
+GH_ACCOUNT=	FreeRDP
+GH_PROJECT=	${GH_ACCOUNT}
 GH_TAGNAME=	5b2455f
 
 CPE_VENDOR=	freerdp_project
