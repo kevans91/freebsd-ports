@@ -1,0 +1,28 @@
+--- client/X11/xfreerdp.1.xml.in.orig	2016-09-09 09:16:29 UTC
++++ client/X11/xfreerdp.1.xml.in
+@@ -17,13 +17,13 @@ PUBLIC "-//OASIS//DTD DocBook XML V4.5//
+ 	</author>
+ 	</refentryinfo>
+ 	<refmeta>
+-	<refentrytitle>xfreerdp</refentrytitle>
++	<refentrytitle>xfreerdp2</refentrytitle>
+ 	<manvolnum>1</manvolnum>
+ 	<refmiscinfo class="source">freerdp</refmiscinfo>
+-	<refmiscinfo class="manual">xfreerdp</refmiscinfo>
++	<refmiscinfo class="manual">xfreerdp2</refmiscinfo>
+ 	</refmeta>
+ 	<refnamediv>
+-	<refname><application>xfreerdp</application></refname>
++	<refname><application>xfreerdp2</application></refname>
+ 	<refpurpose>FreeRDP X11 client</refpurpose>
+ 	</refnamediv>
+ 	<refsynopsisdiv>
+@@ -31,7 +31,7 @@ PUBLIC "-//OASIS//DTD DocBook XML V4.5//
+ 		<date>@MAN_TODAY@</date>
+ 	</refsynopsisdivinfo>
+ 	<para>
+-		<command>xfreerdp</command> [file] [options] [/v:server[:port]]
++		<command>xfreerdp2</command> [file] [options] [/v:server[:port]]
+ 	</para>
+ 	</refsynopsisdiv>
+ 	<refsect1>

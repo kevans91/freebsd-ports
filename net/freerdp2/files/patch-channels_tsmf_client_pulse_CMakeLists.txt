@@ -1,0 +1,8 @@
+--- channels/tsmf/client/pulse/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/tsmf/client/pulse/CMakeLists.txt
+@@ -24,4 +24,4 @@ include_directories(..)
+ include_directories(${PULSE_INCLUDE_DIR})
+ 
+ add_channel_client_subsystem_library(${MODULE_PREFIX} ${MODULE_NAME} ${CHANNEL_NAME} "" TRUE "")
+-target_link_libraries(${MODULE_NAME} winpr ${PULSE_LIBRARY})
++target_link_libraries(${MODULE_NAME} winpr2 ${PULSE_LIBRARY})

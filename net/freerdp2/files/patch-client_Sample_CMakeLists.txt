@@ -1,0 +1,11 @@
+--- client/Sample/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ client/Sample/CMakeLists.txt
+@@ -41,7 +41,7 @@ endif()
+ add_executable(${MODULE_NAME} ${${MODULE_PREFIX}_SRCS})
+ 
+ set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} ${CMAKE_DL_LIBS})
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp-client freerdp)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp-client2 freerdp2)
+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
+ 
+ set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "Client/Sample")

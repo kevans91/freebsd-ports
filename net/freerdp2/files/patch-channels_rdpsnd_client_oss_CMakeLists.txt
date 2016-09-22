@@ -1,0 +1,11 @@
+--- channels/rdpsnd/client/oss/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/rdpsnd/client/oss/CMakeLists.txt
+@@ -27,7 +27,7 @@ add_channel_client_subsystem_library(${M
+ 
+ 
+ 
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr freerdp)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr2 freerdp2)
+ 	
+ set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} ${OSS_LIBRARIES})
+ 

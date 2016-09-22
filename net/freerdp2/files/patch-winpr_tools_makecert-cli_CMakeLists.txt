@@ -1,0 +1,20 @@
+--- winpr/tools/makecert-cli/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ winpr/tools/makecert-cli/CMakeLists.txt
+@@ -16,7 +16,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-set(MODULE_NAME "winpr-makecert")
++set(MODULE_NAME "winpr2-makecert")
+ set(MODULE_PREFIX "WINPR_MAKECERT")
+ 
+ set(${MODULE_PREFIX}_SRCS
+@@ -40,7 +40,7 @@ endif()
+ 
+ add_executable(${MODULE_NAME} ${${MODULE_PREFIX}_SRCS})
+ 
+-set(${MODULE_PREFIX}_LIBS winpr-tools)
++set(${MODULE_PREFIX}_LIBS winpr-tools2)
+ 
+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
+ 

@@ -1,4 +1,4 @@
---- channels/tsmf/client/ffmpeg/tsmf_ffmpeg.c.orig	2016-07-22 13:34:49 UTC
+--- channels/tsmf/client/ffmpeg/tsmf_ffmpeg.c.orig	2016-09-09 09:16:29 UTC
 +++ channels/tsmf/client/ffmpeg/tsmf_ffmpeg.c
 @@ -346,7 +346,7 @@ static BOOL tsmf_ffmpeg_decode_video(ITS
  		av_picture_copy((AVPicture*) frame, (AVPicture*) mdecoder->frame,

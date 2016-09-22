@@ -1,0 +1,11 @@
+--- channels/audin/client/oss/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/audin/client/oss/CMakeLists.txt
+@@ -27,7 +27,7 @@ add_channel_client_subsystem_library(${M
+ 
+ 
+ 
+-set(${MODULE_PREFIX}_LIBS freerdp winpr ${OSS_LIBRARIES})
++set(${MODULE_PREFIX}_LIBS freerdp2 winpr2 ${OSS_LIBRARIES})
+ 
+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
+ 

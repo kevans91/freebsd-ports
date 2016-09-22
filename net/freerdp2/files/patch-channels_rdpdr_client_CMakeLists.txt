@@ -1,0 +1,11 @@
+--- channels/rdpdr/client/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/rdpdr/client/CMakeLists.txt
+@@ -33,7 +33,7 @@ add_channel_client_library(${MODULE_PREF
+ 
+ 
+ 
+-target_link_libraries(${MODULE_NAME} winpr freerdp)
++target_link_libraries(${MODULE_NAME} winpr2 freerdp2)
+ if(APPLE AND (NOT IOS))
+ 	find_library(CORESERVICES_LIBRARY CoreServices)
+ 	target_link_libraries(${MODULE_NAME} ${CORESERVICES_LIBRARY})

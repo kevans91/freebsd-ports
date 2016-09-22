@@ -1,0 +1,8 @@
+--- channels/tsmf/client/gstreamer/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/tsmf/client/gstreamer/CMakeLists.txt
+@@ -62,4 +62,4 @@ set(${MODULE_PREFIX}_SRCS "${SRC}")
+ include_directories(..)
+ 
+ add_channel_client_subsystem_library(${MODULE_PREFIX} ${MODULE_NAME} ${CHANNEL_NAME} "" TRUE "")
+-target_link_libraries(${MODULE_NAME} ${LIBS} winpr)
++target_link_libraries(${MODULE_NAME} ${LIBS} winpr2)

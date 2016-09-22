@@ -1,0 +1,11 @@
+--- channels/urbdrc/client/libusb/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/urbdrc/client/libusb/CMakeLists.txt
+@@ -38,7 +38,7 @@ set(${MODULE_PREFIX}_LIBS ${${MODULE_PRE
+ 	${LIBUSB_1_LIBRARIES})
+ 
+ 
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr2)
+ 
+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
+ 

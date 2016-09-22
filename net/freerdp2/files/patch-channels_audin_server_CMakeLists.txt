@@ -1,0 +1,10 @@
+--- channels/audin/server/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/audin/server/CMakeLists.txt
+@@ -24,6 +24,6 @@ add_channel_server_library(${MODULE_PREF
+ 
+ 
+ 
+-target_link_libraries(${MODULE_NAME} freerdp)
++target_link_libraries(${MODULE_NAME} freerdp2)
+ 
+ set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "Channels/${CHANNEL_NAME}/Server")

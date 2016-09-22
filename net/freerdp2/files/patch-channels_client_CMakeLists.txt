@@ -1,0 +1,11 @@
+--- channels/client/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/client/CMakeLists.txt
+@@ -98,7 +98,7 @@ set(CLIENT_STATIC_ADDIN_TABLE "${CLIENT_
+ 
+ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tables.c.in ${CMAKE_CURRENT_BINARY_DIR}/tables.c)
+ 
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp winpr)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp2 winpr2)
+ 
+ set(${MODULE_PREFIX}_SRCS ${${MODULE_PREFIX}_SRCS} PARENT_SCOPE)
+ set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} PARENT_SCOPE)

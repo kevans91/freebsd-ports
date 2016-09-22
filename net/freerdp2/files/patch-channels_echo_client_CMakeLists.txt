@@ -1,0 +1,9 @@
+--- channels/echo/client/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/echo/client/CMakeLists.txt
+@@ -29,5 +29,5 @@ if (WITH_DEBUG_SYMBOLS AND MSVC AND NOT 
+ 	install(FILES ${CMAKE_BINARY_DIR}/${MODULE_NAME}.pdb DESTINATION ${FREERDP_ADDIN_PATH} COMPONENT symbols)
+ endif()
+ 
+-target_link_libraries(${MODULE_NAME} winpr)
++target_link_libraries(${MODULE_NAME} winpr2)
+ set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "Channels/${CHANNEL_NAME}/Client")

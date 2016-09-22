@@ -1,0 +1,11 @@
+--- channels/printer/client/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ channels/printer/client/CMakeLists.txt
+@@ -40,7 +40,7 @@ add_channel_client_library(${MODULE_PREF
+ 
+ 
+ 
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr freerdp)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} winpr2 freerdp2)
+ 
+ if(WITH_CUPS)
+ 	set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} ${CUPS_LIBRARIES})

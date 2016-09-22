@@ -1,0 +1,77 @@
+--- client/X11/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
++++ client/X11/CMakeLists.txt
+@@ -16,7 +16,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-set(MODULE_NAME "xfreerdp-client")
++set(MODULE_NAME "xfreerdp-client2")
+ set(MODULE_PREFIX "FREERDP_CLIENT_X11_CONTROL")
+ 
+ include(FindDocBookXSL)
+@@ -66,7 +66,7 @@ if(WITH_CLIENT_INTERFACE)
+ else()
+ 	set(${MODULE_PREFIX}_SRCS ${${MODULE_PREFIX}_SRCS} cli/xfreerdp.c xfreerdp.h)
+ 	add_executable(${MODULE_NAME} ${${MODULE_PREFIX}_SRCS})
+-	set_target_properties(${MODULE_NAME} PROPERTIES OUTPUT_NAME "xfreerdp")
++	set_target_properties(${MODULE_NAME} PROPERTIES OUTPUT_NAME "xfreerdp2")
+ 	include_directories(..)
+ endif()
+ 
+@@ -84,14 +84,14 @@ if(WITH_MANPAGES)
+ 
+ 		TODAY(MAN_TODAY)
+ 
+-		configure_file(xfreerdp.1.xml.in xfreerdp.1.xml @ONLY IMMEDIATE)
++		configure_file(xfreerdp.1.xml.in xfreerdp2.1.xml @ONLY IMMEDIATE)
+ 
+ 		add_executable(generate_argument_docbook generate_argument_docbook.c)
+ 	
+-		set(GAD_LIBS freerdp-client)
+-		target_link_libraries(generate_argument_docbook ${GAD_LIBS} freerdp winpr)
++		set(GAD_LIBS freerdp-client2)
++		target_link_libraries(generate_argument_docbook ${GAD_LIBS} freerdp2 winpr2)
+ 
+-		add_custom_command(OUTPUT xfreerdp.1
++		add_custom_command(OUTPUT xfreerdp2.1
+ 					COMMAND generate_argument_docbook
+ 					COMMAND ${CMAKE_COMMAND} -E copy
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-channels.1.xml ${CMAKE_CURRENT_BINARY_DIR}
+@@ -99,22 +99,22 @@ if(WITH_MANPAGES)
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-examples.1.xml ${CMAKE_CURRENT_BINARY_DIR}
+ 					COMMAND ${CMAKE_COMMAND} -E copy
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-envvar.1.xml ${CMAKE_CURRENT_BINARY_DIR}
+-					COMMAND ${XSLTPROC_EXECUTABLE} ${DOCBOOKXSL_DIR}/manpages/docbook.xsl xfreerdp.1.xml
++					COMMAND ${XSLTPROC_EXECUTABLE} ${DOCBOOKXSL_DIR}/manpages/docbook.xsl xfreerdp2.1.xml
+ 					WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+ 					DEPENDS 
+-						${CMAKE_CURRENT_BINARY_DIR}/xfreerdp.1.xml 
++						${CMAKE_CURRENT_BINARY_DIR}/xfreerdp2.1.xml 
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-examples.1.xml 
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-channels.1.xml 
+ 						${CMAKE_CURRENT_SOURCE_DIR}/xfreerdp-envvar.1.xml
+ 						generate_argument_docbook)
+ 
+-		add_custom_target(xfreerdp.manpage ALL
+-			DEPENDS xfreerdp.1)
++		add_custom_target(xfreerdp2.manpage ALL
++			DEPENDS xfreerdp2.1)
+ 
+ 		if(OPENBSD OR FREEBSD)
+-		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xfreerdp.1 DESTINATION man/man1)
++		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xfreerdp2.1 DESTINATION man/man1)
+ 		else()
+-		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xfreerdp.1 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/man/man1)
++		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xfreerdp2.1 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/man/man1)
+ 		endif()
+ 	else()
+ 		message(WARNING "WITH_MANPAGES was set, but xsltproc was not found. man-pages will not be installed")
+@@ -206,7 +206,7 @@ endif()
+ 
+ include_directories(${CMAKE_SOURCE_DIR}/resources)
+ 
+-set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp-client freerdp m)
++set(${MODULE_PREFIX}_LIBS ${${MODULE_PREFIX}_LIBS} freerdp-client2 freerdp2 m)
+ if (NOT APPLE)
+ 	list(APPEND ${MODULE_PREFIX}_LIBS rt)
+ endif()
