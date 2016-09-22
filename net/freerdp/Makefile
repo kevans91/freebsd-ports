@@ -11,9 +11,6 @@ COMMENT=	Free implementation of Remote Desktop Protocol
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-LIB_DEPENDS=	libgstreamer-1.0.so:multimedia/gstreamer1 \
-		libgstbase-1.0.so:multimedia/gstreamer1
-
 USE_LDCONFIG=	yes
 USE_GNOME=	glib20
 USES=		alias cmake:outsource cpe execinfo pkgconfig compiler:c++11-lib gettext ssl
