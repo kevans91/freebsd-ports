@@ -1,4 +1,3 @@
-%%DIRECTFB%%bin/dfreerdp2
 %%X11%%bin/xfreerdp2
 bin/winpr2-hash
 bin/winpr2-makecert
