@@ -57,7 +57,9 @@ X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,
 
 post-extract:
 	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
-		${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|'
+		${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|' \
+				 -e 's|freerdp winpr|freerdp2 winpr2|' \
+				 -e 's|winpr freerdp|winpr2 freerdp2|'
 	${REINPLACE_CMD} -e '/CMAKE_INSTALL_RPATH /d' \
 		${WRKSRC}/CMakeLists.txt
 	${REINPLACE_CMD} -e 's/OPENBSD/OPENBSD OR FREEBSD/' \

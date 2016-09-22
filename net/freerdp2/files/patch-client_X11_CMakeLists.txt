@@ -28,9 +28,8 @@
  		add_executable(generate_argument_docbook generate_argument_docbook.c)
  	
 -		set(GAD_LIBS freerdp-client)
--		target_link_libraries(generate_argument_docbook ${GAD_LIBS} freerdp winpr)
 +		set(GAD_LIBS freerdp-client2)
-+		target_link_libraries(generate_argument_docbook ${GAD_LIBS} freerdp2 winpr2)
+		target_link_libraries(generate_argument_docbook ${GAD_LIBS} freerdp2 winpr2)
  
 -		add_custom_command(OUTPUT xfreerdp.1
 +		add_custom_command(OUTPUT xfreerdp2.1
