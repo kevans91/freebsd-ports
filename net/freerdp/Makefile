@@ -2,7 +2,7 @@
 # $FreeBSD: head/net/freerdp/Makefile 412348 2016-04-01 14:17:44Z mat $
 
 PORTNAME=	freerdp
-PORTVERSION=	2.0.0a
+PORTVERSION=	2.0.0.a
 CATEGORIES=	net comms ipv6
 
 MAINTAINER=	bsdports@kyle-evans.net
@@ -20,11 +20,11 @@ USES=		alias cmake:outsource cpe execinfo pkgconfig compiler:c++11-lib gettext s
 USE_GITHUB=	yes
 GH_ACCOUNT=	FreeRDP
 GH_PROJECT=	${GH_ACCOUNT}
-GH_TAGNAME=	5b2455f
+GH_TAGNAME=	1855e36
 
 CPE_VENDOR=	freerdp_project
 
-CMAKE_ARGS=	-DWITH_LIBSYSTEMD=OFF -DWITH_WAYLAND=OFF 
+CMAKE_ARGS=	-DWITH_LIBSYSTEMD=OFF -DWITH_WAYLAND=OFF -DWITH_GSTREAMER_0_10=OFF
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	-I${WRKSRC}/include -I${WRKSRC}/winpr/include -I${LOCALBASE}/include
 
@@ -61,19 +61,11 @@ SSE_CMAKE_BOOL=		WITH_SSE2
 
 X11_DESC=		Build FreeRDP X11 client
 X11_BUILD_DEPENDS=	xmlto:textproc/xmlto
+X11_CMAKE_ON=		-DWITH_XKBDFILE=OFF
 X11_CMAKE_BOOL=		WITH_X11
 X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,xfixes,xrender
 
 .include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MGSTREAMER}
-CMAKE_ARGS+=		-DWITH_GSTREAMER_0_10=OFF
-.endif
-
-.if ${PORT_OPTIONS:MX11}
-MANPAGE+=		xfreerdp.1
-CMAKE_ARGS+=		-DWITH_XKBFILE=OFF
-.endif
 
 post-extract:
 	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
@@ -88,10 +80,5 @@ post-extract:
 	${REINPLACE_CMD} -e 's|<malloc.h>|<stdlib.h>|' \
 		${WRKSRC}/channels/drive/client/statvfs.c
 	${RM} ${WRKSRC}/cmake/FindOpenSSL.cmake
-
-post-install:
-.for m in ${MANPAGE}
-	${GZIP_CMD} ${STAGEDIR}${MANPREFIX}/man/man1/$m
-.endfor
 
 .include <bsd.port.mk>
