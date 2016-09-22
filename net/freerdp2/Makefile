@@ -25,9 +25,7 @@ CMAKE_ARGS=	-DWITH_LIBSYSTEMD=OFF -DWITH_WAYLAND=OFF -DWITH_GSTREAMER_0_10=OFF
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	-I${WRKSRC}/include -I${WRKSRC}/winpr/include -I${LOCALBASE}/include
 
-MANPAGE=		wlog.1
-
-OPTIONS_DEFINE=		ALSA CUPS DIRECTFB FFMPEG GSTREAMER PULSEAUDIO SSE X11
+OPTIONS_DEFINE=		ALSA CUPS FFMPEG GSTREAMER PULSEAUDIO SSE X11
 OPTIONS_DEFAULT=	CUPS GSTREAMER X11
 OPTIONS_SUB=		yes
 
@@ -36,13 +34,6 @@ ALSA_CMAKE_BOOL=	WITH_ALSA
 
 CUPS_LIB_DEPENDS=	libcups.so:print/cups
 CUPS_CMAKE_BOOL=	WITH_CUPS
-
-# outdated and unmaintained upstream
-DIRECTFB_DESC=		Build FreeRDP DirectFB client (outdated)
-DIRECTFB_LIB_DEPENDS=	libdirectfb.so:devel/directfb
-DIRECTFB_CMAKE_BOOL=	WITH_DIRECTFB
-# currently DirectFB option fails with clang
-DIRECTFB_USE=		gcc=yes
 
 FFMPEG_LIB_DEPENDS=	libavcodec.so:multimedia/ffmpeg \
 			libavutil.so:multimedia/ffmpeg
