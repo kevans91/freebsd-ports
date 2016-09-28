@@ -1,7 +1,7 @@
 # Created by: Alexander Logvinov <avl@FreeBSD.org>
 # $FreeBSD: head/net/freerdp/Makefile 412348 2016-04-01 14:17:44Z mat $
 
-PORTNAME=	freerdp
+PORTNAME=	freerdp2
 PORTVERSION=	2.0.0.a
 CATEGORIES=	net comms ipv6
 
@@ -57,18 +57,27 @@ X11_USE=		xorg=x11,xkbfile,xcursor,xextproto,xv,xinerama,xext,xcursor,xrandr,xi,
 
 post-extract:
 	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
-		${REINPLACE_CMD} -e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|' \
-				 -e 's|freerdp winpr|freerdp2 winpr2|' \
-				 -e 's|winpr freerdp|winpr2 freerdp2|'
-	${REINPLACE_CMD} -e '/CMAKE_INSTALL_RPATH /d' \
+		${REINPLACE_CMD} \
+				-e 's|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig|' \
+				-e 's|list(APPEND $${MODULE_PREFIX}_LIBS freerdp)|list(APPEND $${MODULE_PREFIX}_LIBS freerdp2)|' \
+				-e 's|list(APPEND $${MODULE_PREFIX}_LIBS winpr)|list(APPEND $${MODULE_PREFIX}_LIBS winpr2)|'
+	@${FIND} ${WRKSRC}/ -name 'CMakeLists.txt' | ${XARGS} \
+		${REINPLACE_CMD} -E \
+				-e 's|freerdp winpr|freerdp2 winpr2|' \
+				-e 's|winpr freerdp|winpr2 freerdp2|' \
+				-e 's|^([[:blank:]]*)target_link_libraries\((.+) freerdp\)([[:blank:]]*)$$|\1target_link_libraries(\2 freerdp2)\3|' \
+				-e 's|^([[:blank:]]*)target_link_libraries\((.+) winpr\)([[:blank:]]*)$$|\1target_link_libraries(\2 winpr2)\3|' \
+				-e 's|^([[:blank:]]*)set\((.+) freerdp (.+) winpr\)([[:blank:]]*)$$|\1set(\2 freerdp2 \3 winpr2)\4|' \
+				-e 's|^([[:blank:]]*)set\((.+) winpr\)([[:blank:]]*)$$|\1set(\2 winpr2)\3|'
+	@${REINPLACE_CMD} -e '/CMAKE_INSTALL_RPATH /d' \
 		${WRKSRC}/CMakeLists.txt
-	${REINPLACE_CMD} -e 's/OPENBSD/OPENBSD OR FREEBSD/' \
+	@${REINPLACE_CMD} -e 's/OPENBSD/OPENBSD OR FREEBSD/' \
 		${WRKSRC}/winpr/CMakeLists.txt \
 		${WRKSRC}/client/X11/CMakeLists.txt
-	${REINPLACE_CMD} -e 's/NetBSD__)/NetBSD__) || defined(__FreeBSD__)/' \
+	@${REINPLACE_CMD} -e 's/NetBSD__)/NetBSD__) || defined(__FreeBSD__)/' \
 		${WRKSRC}/winpr/libwinpr/utils/trio/triodef.h
-	${REINPLACE_CMD} -e 's|<malloc.h>|<stdlib.h>|' \
+	@${REINPLACE_CMD} -e 's|<malloc.h>|<stdlib.h>|' \
 		${WRKSRC}/channels/drive/client/statvfs.c
-	${RM} ${WRKSRC}/cmake/FindOpenSSL.cmake
+	@${RM} ${WRKSRC}/cmake/FindOpenSSL.cmake
 
 .include <bsd.port.mk>

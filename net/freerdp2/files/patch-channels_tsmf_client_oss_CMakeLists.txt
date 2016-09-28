@@ -1,9 +1,0 @@
---- channels/tsmf/client/oss/CMakeLists.txt.orig	2016-09-22 04:15:46 UTC
-+++ channels/tsmf/client/oss/CMakeLists.txt
-@@ -24,5 +24,5 @@ include_directories(..)
- include_directories(${OSS_INCLUDE_DIRS})
- 
- add_channel_client_subsystem_library(${MODULE_PREFIX} ${MODULE_NAME} ${CHANNEL_NAME} "" TRUE "")
--target_link_libraries(${MODULE_NAME} winpr)
-+target_link_libraries(${MODULE_NAME} winpr2)
- 

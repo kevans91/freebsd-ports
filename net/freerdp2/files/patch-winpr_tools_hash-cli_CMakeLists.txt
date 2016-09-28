@@ -9,12 +9,3 @@
  set(MODULE_PREFIX "WINPR_TOOLS_HASH")
  
  set(${MODULE_PREFIX}_SRCS
-@@ -39,7 +39,7 @@ endif()
- 
- add_executable(${MODULE_NAME} ${${MODULE_PREFIX}_SRCS})
- 
--set(${MODULE_PREFIX}_LIBS winpr)
-+set(${MODULE_PREFIX}_LIBS winpr2)
- 
- target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
- 
